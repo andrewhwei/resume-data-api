@@ -1,50 +1,18 @@
-json.id student.id
-json.first_name student.first_name
-json.last_name student.last_name
-json.email student.email
-json.password student.password
-json.phone_number student.phone_number
-json.short_bio student.short_bio
-json.linkedin_url student.linkedin_url
-json.twitter_handle student.twitter_handle
-json.wordpress_url student.wordpress_url
-json.resume_url student.resume_url
-json.github_url student.github_url
-json.photo student.photo
-
-json.capstone do
-  json.id student.capstone.id
-  json.name student.capstone.name
-  json.description student.capstone.description
-  json.url student.capstone.url
-  json.screenshot student.capstone.screenshot
-end
-
-json.educations do
-  json.array! student.educations.each do |education|
-    json.id education.id
-    json.start_date education.start_date
-    json.end_date education.end_date
-    json.degree education.degree
-    json.university_name education.university_name
-    json.details education.details
+json.extract! @student, :id, :created_at, :updated_at
+  json.capstone do
+    json.name @student.name
   end
 end
 
-json.experiences do
-  json.array! student.experiences.each do |experience|
-    json.id experience.id
-    json.start_date experience.start_date
-    json.end_date experience.end_date
-    json.degree experience.job_title
-    json.university_name experience.company_name
-    json.details experience.details
-  end
+json.content format_content(@student.content)
+json.(@message, :created_at, :updated_at)
+
+json.author do
+  json.name @message.creator.name.familiar
+  json.email_address @message.creator.email_address_with_name
+  json.url url_for(@message.creator, format: :json)
 end
 
-json.skills do
-  json.array! student.skills.each do |skill|
-    json.id skill.id
-    json.name skill.name
-  end
+if current_user.admin?
+  json.visitors calculate_visitors(@message)
 end

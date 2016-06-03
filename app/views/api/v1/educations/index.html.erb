@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Api V1 Educations</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @api_v1_educations.each do |api_v1_education| %>
+      <tr>
+        <td><%= link_to 'Show', api_v1_education %></td>
+        <td><%= link_to 'Edit', edit_api_v1_education_path(api_v1_education) %></td>
+        <td><%= link_to 'Destroy', api_v1_education, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Education', new_api_v1_education_path %>
