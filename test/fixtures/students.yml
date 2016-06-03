@@ -1,0 +1,35 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  experience_id: 1
+  education_id: 1
+  capstone_id: 1
+  first_name: MyString
+  last_name: MyString
+  email: MyString
+  password: MyString
+  phone_number: MyString
+  short_bio: MyText
+  linkedin_url: MyString
+  twitter_handle: MyString
+  wordpress_url: MyString
+  resume_url: MyString
+  github_url: MyString
+  photo: MyString
+
+two:
+  experience_id: 1
+  education_id: 1
+  capstone_id: 1
+  first_name: MyString
+  last_name: MyString
+  email: MyString
+  password: MyString
+  phone_number: MyString
+  short_bio: MyText
+  linkedin_url: MyString
+  twitter_handle: MyString
+  wordpress_url: MyString
+  resume_url: MyString
+  github_url: MyString
+  photo: MyString
