@@ -3,10 +3,8 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      root 'students#index'
-      get '/students' => 'students#index'
-     # resources :students, :capstones, :educations, :experiences, 
-         #       :skills
+     resources :students, :capstones, :educations, :experiences, 
+               :skills
     end
   end
 
