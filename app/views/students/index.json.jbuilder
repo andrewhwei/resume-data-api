@@ -13,7 +13,13 @@ json.array! @students do |student|
   json.github_url student.github_url
   json.photo student.photo
 
-  json.partial! 'tea.json.jbuilder', tea: tea
+  json.capstone do
+    json.id student.capstone.id
+    json.name student.capstone.name
+    json.description student.capstone.description
+    json.url student.capstone.url
+    json.screenshot student.capstone.screenshot
+  end
 
   json.educations do
     json.array! student.educations.each do |education|

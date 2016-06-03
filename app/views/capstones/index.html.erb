@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Capstones</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @capstones.each do |capstone| %>
+      <tr>
+        <td><%= link_to 'Show', capstone %></td>
+        <td><%= link_to 'Edit', edit_capstone_path(capstone) %></td>
+        <td><%= link_to 'Destroy', capstone, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Capstone', new_capstone_path %>

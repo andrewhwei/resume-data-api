@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   root 'students#index'
-  resources :students
+  resources :students, :capstones, :skills, :educations, :experiences
 
 
   # The priority is based upon order of creation: first created -> highest priority.
