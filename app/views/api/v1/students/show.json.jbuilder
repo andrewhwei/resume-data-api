@@ -1,1 +1,1 @@
-show.json.jbuilder
+json.student @student
