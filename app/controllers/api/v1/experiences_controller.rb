@@ -4,12 +4,13 @@ class Api::V1::ExperiencesController < ApplicationController
   # GET /api/v1/experiences
   # GET /api/v1/experiences.json
   def index
-    @api_v1_experiences = Api::V1::Experience.all
+    @experiences = Experience.all
   end
 
   # GET /api/v1/experiences/1
   # GET /api/v1/experiences/1.json
   def show
+    @experience = Experience.find(params[:id])
   end
 
   # GET /api/v1/experiences/new

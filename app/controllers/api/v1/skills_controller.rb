@@ -4,12 +4,13 @@ class Api::V1::SkillsController < ApplicationController
   # GET /api/v1/skills
   # GET /api/v1/skills.json
   def index
-    @api_v1_skills = Api::V1::Skill.all
+    @skills = Skill.all
   end
 
   # GET /api/v1/skills/1
   # GET /api/v1/skills/1.json
   def show
+    @skill = Skill.find(params[:id])
   end
 
   # GET /api/v1/skills/new

@@ -4,12 +4,13 @@ class Api::V1::EducationsController < ApplicationController
   # GET /api/v1/educations
   # GET /api/v1/educations.json
   def index
-    @api_v1_educations = Api::V1::Education.all
+    @educations = Education.all
   end
 
   # GET /api/v1/educations/1
   # GET /api/v1/educations/1.json
   def show
+    @education = Education.find(params[:id])
   end
 
   # GET /api/v1/educations/new
