@@ -1,0 +1,55 @@
+require 'faker'
+
+(2..100).each do |n|
+
+  tempStartDate = Faker::Time.between(DateTime.now - 99999, DateTime.now)
+  tempEndDate = Faker::Time.between(tempStartDate, DateTime.now)
+  tempStartDate2 = Faker::Time.between(DateTime.now - 99999, DateTime.now)
+  tempEndDate2 = Faker::Time.between(tempStartDate, DateTime.now)
+
+  tempStudent = Student.new(
+    {first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, email: Faker::Internet.email, password: '111111', phone_number: Faker::PhoneNumber.phone_number, short_bio: Faker::Hipster.paragraph, linkedin_url: Faker::Internet.url, twitter_handle: Faker::Internet.user_name, wordpress_url: Faker::Internet.url('wordpress.com'), resume_url: Faker::Internet.url, github_url: Faker::Internet.url('github.com'), photo: Faker::Placeholdit.image}
+  )
+  tempStudent.save
+  Capstone.create([
+    {student_id: tempStudent.id, name: Faker::Company.name, description: Faker::Hipster.paragraph, url: Faker::Internet.url, screenshot: Faker::Placeholdit.image}
+  ])
+  Education.create([
+    {student_id: tempStudent.id, start_date: tempStartDate.strftime("%Y"), end_date: tempEndDate.strftime("%Y"), degree: Faker::Lorem.word, university_name: Faker::University.name, details: Faker::Hipster.paragraph}
+  ])
+  Experience.create([
+    {student_id: tempStudent.id, start_date: tempStartDate2.strftime("%Y"), end_date: tempEndDate2.strftime("%Y"), job_title: Faker::Company.profession, company_name: Faker::Company.name, details: Faker::Hipster.paragraph}
+  ])
+  tempSkill = Skill.new(
+    {name: Faker::Hipster.word}
+  )
+  tempSkill.save
+  SkilledStudent.create!([
+    {student_id: tempStudent.id, skill_id: tempSkill.id}
+  ])
+end
+
+
+(1..25).each do |n|
+
+  offset = rand(Student.count)
+  rand_student = Student.offset(offset).first
+  tempStartDate = Faker::Time.between(DateTime.now - 99999, DateTime.now)
+  tempEndDate = Faker::Time.between(tempStartDate, DateTime.now)
+  tempStartDate2 = Faker::Time.between(DateTime.now - 99999, DateTime.now)
+  tempEndDate2 = Faker::Time.between(tempStartDate, DateTime.now)
+
+  Education.create([
+    {student_id: rand_student.id, start_date: tempStartDate.strftime("%Y"), end_date: tempEndDate.strftime("%Y"), degree: Faker::Lorem.word, university_name: Faker::University.name, details: Faker::Hipster.paragraph}
+  ])
+  Experience.create([
+    {student_id: rand_student.id, start_date: tempStartDate2.strftime("%Y"), end_date: tempEndDate2.strftime("%Y"), job_title: Faker::Company.profession, company_name: Faker::Company.name, details: Faker::Hipster.paragraph}
+  ])
+  tempSkill = Skill.new(
+    {name: Faker::Hipster.word}
+  )
+  tempSkill.save
+  SkilledStudent.create!([
+    {student_id: rand_student.id, skill_id: tempSkill.id}
+  ])
+end
