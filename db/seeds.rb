@@ -1,14 +1,15 @@
-100.times do |n|
-  first_name = Faker::Name.first_name
-  last_name = Faker::Name.last_name
-  name = (first_name + last_name).downcase
+names = [0]
 
-  year = (1980..2008).to_a.sample
+1000.times do |n|
 
-  object = Bazaar.object.downcase
-  place = Bazaar.super_object.downcase
-  a = ['a','e','i','o','u'].include?(place[0]) ? 'an' : 'a'
-
+  name = 0
+  while names.include? name
+    first_name = Faker::Name.first_name
+    last_name = Faker::Name.last_name
+    name = (first_name + last_name).downcase
+  end
+  names << name
+   
   Student.create first_name: first_name, 
                   last_name: last_name,
                       email: Faker::Internet.free_email(name),
@@ -28,6 +29,11 @@
                            url: "#{Bazaar.heroku}.heroku.com",
                     screenshot: Faker::Company.logo
 
+  year = (1980..2008).to_a.sample
+  object = Bazaar.object.downcase
+  location = Bazaar.super_object.downcase
+  a = ['a','e','i','o','u'].include?(location[0]) ? 'an' : 'a'
+ 
   Education.create  student_id: (n + 1),
                     start_date: year.to_s, 
                       end_date: (year + 4 + [0,0,0,1].sample).to_s, 

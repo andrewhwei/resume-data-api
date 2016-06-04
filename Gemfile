@@ -12,8 +12,6 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'bazaar'
 gem 'faker'
-gem 'random_username'
-gem 'seed_dump'
 
 group :development, :test do
   gem 'byebug'

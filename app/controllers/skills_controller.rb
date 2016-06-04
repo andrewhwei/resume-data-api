@@ -1,13 +1,11 @@
 class SkillsController < ApplicationController
   before_action :set_skill, only: [:show, :edit, :update, :destroy]
 
-  # GET /skills
   # GET /skills.json
   def index
     @skills = Skill.all
   end
 
-  # GET /skills/1
   # GET /skills/1.json
   def show
   end
@@ -21,7 +19,6 @@ class SkillsController < ApplicationController
   def edit
   end
 
-  # POST /skills
   # POST /skills.json
   def create
     @skill = Skill.new(skill_params)
@@ -37,7 +34,6 @@ class SkillsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /skills/1
   # PATCH/PUT /skills/1.json
   def update
     respond_to do |format|
@@ -51,7 +47,6 @@ class SkillsController < ApplicationController
     end
   end
 
-  # DELETE /skills/1
   # DELETE /skills/1.json
   def destroy
     @skill.destroy
@@ -62,13 +57,13 @@ class SkillsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_skill
-      @skill = Skill.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def skill_params
-      params.fetch(:skill, {})
-    end
+  def set_skill
+    @skill = Skill.find(params[:id])
+  end
+
+
+  def skill_params
+    params.fetch(:skill, {})
+  end
 end
