@@ -1,10 +1,10 @@
 class Api::V1::ExperiencesController < ApplicationController
-  before_action :set_api_v1_experience, only: [:show, :edit, :update, :destroy]
-
+  before_action :set_experience, only: [:show, :edit, :update, :destroy]
+  skip_before_action :verify_authenticity_token
   # GET /api/v1/experiences
   # GET /api/v1/experiences.json
   def index
-    @api_v1_experiences = Api::V1::Experience.all
+    @experiences = Experience.all
   end
 
   # GET /api/v1/experiences/1
@@ -14,7 +14,7 @@ class Api::V1::ExperiencesController < ApplicationController
 
   # GET /api/v1/experiences/new
   def new
-    @api_v1_experience = Api::V1::Experience.new
+    @experience = Experience.new
   end
 
   # GET /api/v1/experiences/1/edit
@@ -24,15 +24,15 @@ class Api::V1::ExperiencesController < ApplicationController
   # POST /api/v1/experiences
   # POST /api/v1/experiences.json
   def create
-    @api_v1_experience = Api::V1::Experience.new(api_v1_experience_params)
+    @experience = Experience.new(experience_params)
 
     respond_to do |format|
-      if @api_v1_experience.save
-        format.html { redirect_to @api_v1_experience, notice: 'Experience was successfully created.' }
-        format.json { render :show, status: :created, location: @api_v1_experience }
+      if @experience.save
+        format.html { redirect_to @experience, notice: 'Experience was successfully created.' }
+        format.json { render :show, status: :created, location: @experience }
       else
         format.html { render :new }
-        format.json { render json: @api_v1_experience.errors, status: :unprocessable_entity }
+        format.json { render json: @experience.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -41,12 +41,12 @@ class Api::V1::ExperiencesController < ApplicationController
   # PATCH/PUT /api/v1/experiences/1.json
   def update
     respond_to do |format|
-      if @api_v1_experience.update(api_v1_experience_params)
-        format.html { redirect_to @api_v1_experience, notice: 'Experience was successfully updated.' }
-        format.json { render :show, status: :ok, location: @api_v1_experience }
+      if @experience.update(experience_params)
+        format.html { redirect_to @experience, notice: 'Experience was successfully updated.' }
+        format.json { render :show, status: :ok, location: @experience }
       else
         format.html { render :edit }
-        format.json { render json: @api_v1_experience.errors, status: :unprocessable_entity }
+        format.json { render json: @experience.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -54,21 +54,21 @@ class Api::V1::ExperiencesController < ApplicationController
   # DELETE /api/v1/experiences/1
   # DELETE /api/v1/experiences/1.json
   def destroy
-    @api_v1_experience.destroy
+    @experience.destroy
     respond_to do |format|
-      format.html { redirect_to api_v1_experiences_url, notice: 'Experience was successfully destroyed.' }
+      format.html { redirect_to '/api/v1/experiences', notice: 'Experience was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_api_v1_experience
-      @api_v1_experience = Api::V1::Experience.find(params[:id])
+    def set_experience
+      @experience = Experience.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def api_v1_experience_params
-      params.fetch(:api_v1_experience, {})
+    def experience_params
+      params.fetch(:experience, {})
     end
 end

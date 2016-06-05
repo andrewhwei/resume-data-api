@@ -1,6 +1,6 @@
 names = [0]
 
-1000.times do |n|
+100.times do |n|
 
   name = 0
   while names.include? name
@@ -39,7 +39,7 @@ names = [0]
                       end_date: (year + 4 + [0,0,0,1].sample).to_s, 
                         degree: Faker::Superhero.power, 
                university_name: Faker::University.name, 
-                       details: "I studied #{object}s on #{a} #{place}."
+                       details: "I studied #{object}s on #{a} #{location}."
 
   Experience.create student_id: (n + 1), 
                     start_date: (2016 - rand(3)).to_s, end_date: '2016', 

@@ -4,7 +4,7 @@ class Api::V1::EducationsController < ApplicationController
   # GET /api/v1/educations
   # GET /api/v1/educations.json
   def index
-    @api_v1_educations = Api::V1::Education.all
+    @educations = Education.all
   end
 
   # GET /api/v1/educations/1
@@ -14,7 +14,7 @@ class Api::V1::EducationsController < ApplicationController
 
   # GET /api/v1/educations/new
   def new
-    @api_v1_education = Api::V1::Education.new
+    @education = Education.new
   end
 
   # GET /api/v1/educations/1/edit
@@ -24,15 +24,15 @@ class Api::V1::EducationsController < ApplicationController
   # POST /api/v1/educations
   # POST /api/v1/educations.json
   def create
-    @api_v1_education = Api::V1::Education.new(api_v1_education_params)
+    @education = Education.new(education_params)
 
     respond_to do |format|
-      if @api_v1_education.save
-        format.html { redirect_to @api_v1_education, notice: 'Education was successfully created.' }
-        format.json { render :show, status: :created, location: @api_v1_education }
+      if @education.save
+        format.html { redirect_to @education, notice: 'Education was successfully created.' }
+        format.json { render :show, status: :created, location: @education }
       else
         format.html { render :new }
-        format.json { render json: @api_v1_education.errors, status: :unprocessable_entity }
+        format.json { render json: @education.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -41,12 +41,12 @@ class Api::V1::EducationsController < ApplicationController
   # PATCH/PUT /api/v1/educations/1.json
   def update
     respond_to do |format|
-      if @api_v1_education.update(api_v1_education_params)
-        format.html { redirect_to @api_v1_education, notice: 'Education was successfully updated.' }
-        format.json { render :show, status: :ok, location: @api_v1_education }
+      if @education.update(education_params)
+        format.html { redirect_to @education, notice: 'Education was successfully updated.' }
+        format.json { render :show, status: :ok, location: @education }
       else
         format.html { render :edit }
-        format.json { render json: @api_v1_education.errors, status: :unprocessable_entity }
+        format.json { render json: @education.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -54,7 +54,7 @@ class Api::V1::EducationsController < ApplicationController
   # DELETE /api/v1/educations/1
   # DELETE /api/v1/educations/1.json
   def destroy
-    @api_v1_education.destroy
+    @education.destroy
     respond_to do |format|
       format.html { redirect_to api_v1_educations_url, notice: 'Education was successfully destroyed.' }
       format.json { head :no_content }
@@ -64,11 +64,11 @@ class Api::V1::EducationsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_api_v1_education
-      @api_v1_education = Api::V1::Education.find(params[:id])
+      @education = Education.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def api_v1_education_params
-      params.fetch(:api_v1_education, {})
+      params.fetch(:education, {})
     end
 end
