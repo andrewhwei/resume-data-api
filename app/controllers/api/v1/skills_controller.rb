@@ -1,6 +1,6 @@
 class Api::V1::SkillsController < ApplicationController
-  before_action :set_api_v1_skill, only: [:show, :edit, :update, :destroy]
-
+  before_action :set_skill, only: [:show, :edit, :update, :destroy]
+  skip_before_action :verify_authenticity_token
   # GET /api/v1/skills
   # GET /api/v1/skills.json
   def index
@@ -15,7 +15,7 @@ class Api::V1::SkillsController < ApplicationController
 
   # GET /api/v1/skills/new
   def new
-    @api_v1_skill = Api::V1::Skill.new
+    @skill = Skill.new
   end
 
   # GET /api/v1/skills/1/edit
@@ -25,15 +25,15 @@ class Api::V1::SkillsController < ApplicationController
   # POST /api/v1/skills
   # POST /api/v1/skills.json
   def create
-    @api_v1_skill = Api::V1::Skill.new(api_v1_skill_params)
+    @skill = Skill.new(skill_params)
 
     respond_to do |format|
-      if @api_v1_skill.save
-        format.html { redirect_to @api_v1_skill, notice: 'Skill was successfully created.' }
-        format.json { render :show, status: :created, location: @api_v1_skill }
+      if @skill.save
+        format.html { redirect_to 'api/v1/skills', notice: 'Skill was successfully created.' }
+        format.json { render :show, status: :created, location: 'api/v1/skills' }
       else
         format.html { render :new }
-        format.json { render json: @api_v1_skill.errors, status: :unprocessable_entity }
+        format.json { render json: @skill.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -42,12 +42,12 @@ class Api::V1::SkillsController < ApplicationController
   # PATCH/PUT /api/v1/skills/1.json
   def update
     respond_to do |format|
-      if @api_v1_skill.update(api_v1_skill_params)
-        format.html { redirect_to @api_v1_skill, notice: 'Skill was successfully updated.' }
-        format.json { render :show, status: :ok, location: @api_v1_skill }
+      if @skill.update(skill_params)
+        format.html { redirect_to 'api/v1/skills', notice: 'Skill was successfully updated.' }
+        format.json { render :show, status: :ok, location: 'api/v1/skills' }
       else
         format.html { render :edit }
-        format.json { render json: @api_v1_skill.errors, status: :unprocessable_entity }
+        format.json { render json: @skill.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -55,21 +55,21 @@ class Api::V1::SkillsController < ApplicationController
   # DELETE /api/v1/skills/1
   # DELETE /api/v1/skills/1.json
   def destroy
-    @api_v1_skill.destroy
+    @skill.destroy
     respond_to do |format|
-      format.html { redirect_to api_v1_skills_url, notice: 'Skill was successfully destroyed.' }
+      format.html { redirect_to 'api/v1/skills', notice: 'Skill was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_api_v1_skill
-      @api_v1_skill = Api::V1::Skill.find(params[:id])
+    def set_skill
+      @skill = Skill.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def api_v1_skill_params
-      params.fetch(:api_v1_skill, {})
+    def skill_params
+      params.fetch(:skill, {})
     end
 end

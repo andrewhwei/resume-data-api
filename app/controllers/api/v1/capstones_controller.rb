@@ -1,6 +1,6 @@
 class Api::V1::CapstonesController < ApplicationController
   before_action :set_api_v1_capstone, only: [:show, :edit, :update, :destroy]
-
+  skip_before_action :verify_authenticity_token
   # GET /api/v1/capstones
   # GET /api/v1/capstones.json
   def index
@@ -15,7 +15,7 @@ class Api::V1::CapstonesController < ApplicationController
 
   # GET /api/v1/capstones/new
   def new
-    @api_v1_capstone = Api::V1::Capstone.new
+    @capstone = Capstone.new
   end
 
   # GET /api/v1/capstones/1/edit
@@ -25,15 +25,15 @@ class Api::V1::CapstonesController < ApplicationController
   # POST /api/v1/capstones
   # POST /api/v1/capstones.json
   def create
-    @api_v1_capstone = Api::V1::Capstone.new(api_v1_capstone_params)
+    @capstone = Capstone.new(capstone_params)
 
     respond_to do |format|
-      if @api_v1_capstone.save
-        format.html { redirect_to @api_v1_capstone, notice: 'Capstone was successfully created.' }
-        format.json { render :show, status: :created, location: @api_v1_capstone }
+      if @capstone.save
+        format.html { redirect_to '/api/v1/capstones', notice: 'Capstone was successfully created.' }
+        format.json { render :show, status: :created, location: '/api/v1/capstones' }
       else
         format.html { render :new }
-        format.json { render json: @api_v1_capstone.errors, status: :unprocessable_entity }
+        format.json { render json: capstone.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -42,12 +42,12 @@ class Api::V1::CapstonesController < ApplicationController
   # PATCH/PUT /api/v1/capstones/1.json
   def update
     respond_to do |format|
-      if @api_v1_capstone.update(api_v1_capstone_params)
-        format.html { redirect_to @api_v1_capstone, notice: 'Capstone was successfully updated.' }
-        format.json { render :show, status: :ok, location: @api_v1_capstone }
+      if @capstone.update(capstone_params)
+        format.html { redirect_to '/api/v1/capstones', notice: 'Capstone was successfully updated.' }
+        format.json { render :show, status: :ok, location: '/api/v1/capstones' }
       else
         format.html { render :edit }
-        format.json { render json: @api_v1_capstone.errors, status: :unprocessable_entity }
+        format.json { render json: @capstone.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -55,21 +55,21 @@ class Api::V1::CapstonesController < ApplicationController
   # DELETE /api/v1/capstones/1
   # DELETE /api/v1/capstones/1.json
   def destroy
-    @api_v1_capstone.destroy
+    @capstone.destroy
     respond_to do |format|
-      format.html { redirect_to api_v1_capstones_url, notice: 'Capstone was successfully destroyed.' }
+      format.html { redirect_to '/api/v1/capstones', notice: 'Capstone was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_api_v1_capstone
-      @api_v1_capstone = Api::V1::Capstone.find(params[:id])
+    def set_capstone
+      @capstone = Capstone.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def api_v1_capstone_params
-      params.fetch(:api_v1_capstone, {})
+    def capstone_params
+      params.fetch(:capstone, {})
     end
 end
