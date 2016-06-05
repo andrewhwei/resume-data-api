@@ -10,7 +10,6 @@ class Api::V1::StudentsController < ApplicationController
   # GET /students/1
   # GET /students/1.json
   def show
-    @student = Student.find(params[:id])
   end
 
   # GET /students/new
@@ -25,7 +24,7 @@ class Api::V1::StudentsController < ApplicationController
   # POST /students
   # POST /students.json
   def create
-    @student = Student.new(student_params)
+    @student = Student.new(first_name: params[:first_name], last_name: params[:last_name], email: params[:email], password: params[:password], phone_number: params[:phone_number], short_bio: params[:short_bio], linkedin_url: params[:linkedin_url], twitter_handle: params[:twitter_handle], wordpress_url: params[:wordpress_url], resume_url: params[:resume_url], github_url: params[:github_url], photo: params[:photo])
 
     respond_to do |format|
       if @student.save
@@ -42,7 +41,7 @@ class Api::V1::StudentsController < ApplicationController
   # PATCH/PUT /students/1.json
   def update
     respond_to do |format|
-      if @student.update(student_params)
+      if @student.update(first_name: params[:first_name], last_name: params[:last_name], email: params[:email], password: params[:password], phone_number: params[:phone_number], short_bio: params[:short_bio], linkedin_url: params[:linkedin_url], twitter_handle: params[:twitter_handle], wordpress_url: params[:wordpress_url], resume_url: params[:resume_url], github_url: params[:github_url], photo: params[:photo])
         format.html { redirect_to @student, notice: 'Student was successfully updated.' }
         format.json { render :show, status: :ok, location: @student }
       else

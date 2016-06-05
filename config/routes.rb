@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-
+  ;lskdjfl;akjsdlkf
   namespace :api do
     namespace :v1 do
      resources :students, :capstones, :educations, :experiences, 
