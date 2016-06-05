@@ -28,8 +28,8 @@ class Api::V1::ExperiencesController < ApplicationController
 
     respond_to do |format|
       if @experience.save
-        format.html { redirect_to @experience, notice: 'Experience was successfully created.' }
-        format.json { render :show, status: :created, location: @experience }
+        format.html { redirect_to '/api/v1/experiences', notice: 'Experience was successfully created.' }
+        format.json { render :show, status: :created, location: '/api/v1/experiences' }
       else
         format.html { render :new }
         format.json { render json: @experience.errors, status: :unprocessable_entity }
@@ -42,8 +42,8 @@ class Api::V1::ExperiencesController < ApplicationController
   def update
     respond_to do |format|
       if @experience.update(experience_params)
-        format.html { redirect_to @experience, notice: 'Experience was successfully updated.' }
-        format.json { render :show, status: :ok, location: @experience }
+        format.html { redirect_to '/api/v1/experiences', notice: 'Experience was successfully updated.' }
+        format.json { render :show, status: :ok, location: '/api/v1/experiences' }
       else
         format.html { render :edit }
         format.json { render json: @experience.errors, status: :unprocessable_entity }
