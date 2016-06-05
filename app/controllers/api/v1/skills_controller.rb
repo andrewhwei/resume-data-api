@@ -10,6 +10,7 @@ class Api::V1::SkillsController < ApplicationController
   # GET /api/v1/skills/1
   # GET /api/v1/skills/1.json
   def show
+    @skill = Skill.find(params[:id])
   end
 
   # GET /api/v1/skills/new

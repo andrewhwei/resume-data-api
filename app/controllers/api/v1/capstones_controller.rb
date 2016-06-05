@@ -10,6 +10,7 @@ class Api::V1::CapstonesController < ApplicationController
   # GET /api/v1/capstones/1
   # GET /api/v1/capstones/1.json
   def show
+    @capstone = Capstone.find(params[:id])
   end
 
   # GET /api/v1/capstones/new

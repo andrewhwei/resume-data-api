@@ -10,6 +10,7 @@ class Api::V1::ExperiencesController < ApplicationController
   # GET /api/v1/experiences/1
   # GET /api/v1/experiences/1.json
   def show
+    @experience = Experience.find(params[:id])
   end
 
   # GET /api/v1/experiences/new
